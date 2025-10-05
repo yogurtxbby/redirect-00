@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Localizando sua vaga…</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #000; /* Fundo preto */
+      color: #fff;
+      font-family: Arial, sans-serif;
+      flex-direction: column;
+      text-align: center;
+    }
+    .bar {
+      width: 80%;
+      height: 10px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 5px;
+      overflow: hidden;
+      margin-top: 20px;
+    }
+    .fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, #8ecbff, #b3e0ff); /* Azul bebê */
+      border-radius: 5px;
+      transition: width 0.3s ease;
+      box-shadow: 0 0 15px rgba(140,200,255,0.6);
+    }
+    .msg {
+      font-size: 1.2rem;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="msg" id="mensagem">Localizando sua vaga entre as vagas...</div>
+  <div class="bar"><div class="fill" id="fill"></div></div>
+
+  <script>
+    const telegramURL = 'https://t.me/seu_canal';
+    const fill = document.getElementById('fill');
+    const msg = document.getElementById('mensagem');
+    let progress = 0;
+    const interval = setInterval(() => {
+      progress += 2;
+      fill.style.width = progress + '%';
+      if (progress >= 100) {
+        clearInterval(interval);
+        etapa2();
+      }
+    }, 80);
+    function etapa2() {
+      msg.textContent = 'Parabéns! Você garantiu a última vaga. Redirecionando para o Telegram...';
+      fill.style.width = '100%';
+      setTimeout(() => {
+        window.location.href = telegramURL;
+      }, 2500);
+    }
+  </script>
+</body>
+</html>
